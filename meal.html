@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Recipe Details</title>
+        <link rel="stylesheet" href="styles.css">
+      </head>
+      <body>
+        <nav>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="search.html">Search Recipes</a></li>
+              <li><a href="favorites.html">Favorites</a></li>
+          </ul>
+        </nav>
+        <main>
+          <div id="recipeDetails"></div>
+        </main>
+        <script>
+          const mealId = new URLSearchParams(window.location.search).get('id');
+      
+          fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+            .then(res => res.json())
+            .then(data => {
+              const meal = data.meals[0];
+              const container = document.getElementById('recipeDetails');
+      
+              const ingredients = [];
+              for (let i = 1; i <= 20; i++) {
+                const ing = meal[`strIngredient${i}`];
+                const measure = meal[`strMeasure${i}`];
+                if (ing) ingredients.push(`${measure} ${ing}`);
+              }
+      
+              container.innerHTML = `
+                <h1>${meal.strMeal}</h1>
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}" width="300">
+                <h2>Ingredients</h2>
+                <ul>${ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+                <h2>Instructions</h2>
+                <p>${meal.strInstructions}</p>
+              `;
+            });
+        </script>
+      </body>
+</html>
