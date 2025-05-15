@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
           div.textContent = cat.strCategory;
           div.className = 'category-button';
   
-          // 🚀 Redirect to meals.html with selected category
+          // go to meals.html with the type of category picked 
           div.addEventListener('click', () => {
             window.location.href = `meals.html?category=${cat.strCategory}`;
           });
@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
   
+  // save favorites
   function saveFavorite(id, name, thumb) {
-    fetch('http://localhost:3000/api/save', {
+    fetch('https://recipe-finder-website-uqtv.onrender.com/api/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, name, thumb })
