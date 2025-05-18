@@ -15,7 +15,7 @@ Recipe Finder is a website that helps users:
 ---
 
 ## Pages
-- `index.html` – Homepage with random meal + categories  
+- `home.html` – Homepage with random meal + categories  
 - `search.html` – Search meals by ingredient  
 - `meals.html` – View meals by category  
 - `meal.html` – View full recipe details  
